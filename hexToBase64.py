@@ -142,6 +142,7 @@ def binary2base64(binary):
             binary[n] = '/'
     print(''.join(binary))
 
-binary2base64(hex2binary(hex_string))
+if __name__ == "__main__":
+    binary2base64(hex2binary(hex_string))
 
 
