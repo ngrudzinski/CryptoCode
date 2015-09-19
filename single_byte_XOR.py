@@ -1,3 +1,5 @@
+import binascii
+
 encoded_hex = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
 
 scale = 16
@@ -6,10 +8,20 @@ print(length)
 num_of_bits = length * 4
 
 binary_string = bin(int(encoded_hex, scale))[2:].zfill(num_of_bits)
-print(binary_string)
+binary_array = list(binary_string)
+print(binary_array)
 
 for i in range(0, 256):
-    bin_i =
+    # this next line creates byte sized strings of 0 to 256 in binary
+    bin_i8 = bin(i)[2:].zfill(8)
+    bin_i = bin_i8 * (length/2)
+    bin_i_array = list(bin_i)
+    xor_string = ''
+    for k in range(0, (length*4)):
+        xor_char = int(binary_array[k]) ^ int(bin_i_array[k])
+        xor_string += str(xor_char)
+    # at this point xor_string is the correct xor of the byte and string
+    print(''.join(chr(int(xor_string[i:i+8], 2)) for i in range(0, len(xor_string), 8)))
 
 
 
